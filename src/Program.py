@@ -2,3 +2,4 @@
 import TCPServer, LCDController
 
 TCPServer.TCPSRV()
+LCDController.LCDStandby()
