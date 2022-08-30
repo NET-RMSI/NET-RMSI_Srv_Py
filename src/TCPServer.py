@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import ipaddress
 import socket
 
 
@@ -6,7 +7,7 @@ import socket
 def TCPSRV():
 
    PORT = 13062
-   IPADDRESS = socket.gethostname()
+   IPADDRESS = ipaddress.IPv4Address()
    tcpsrv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    tcpsrv.bind((IPADDRESS, PORT))
 
