@@ -1,13 +1,15 @@
 #!/usr/bin/python3
-import ipaddress
 import socket
+
+tcpconstatus = False
 
 
 
 def TCPSRV():
 
+   HOSTNAME = socket.gethostname()
    PORT = 13062
-   IPADDRESS = ipaddress.IPv4Address()
+   IPADDRESS = socket.gethostbyname(HOSTNAME)
    tcpsrv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    tcpsrv.bind((IPADDRESS, PORT))
 
@@ -16,6 +18,7 @@ def TCPSRV():
    tcpcli, address = tcpsrv.accept()
    with tcpcli:
       print(f"Connected by {address}")
+      tcpconstatus = True
       while True:
          data = tcpcli.recv(1024)
          if not data:

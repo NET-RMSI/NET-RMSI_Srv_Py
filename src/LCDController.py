@@ -1,15 +1,19 @@
 #!/usr/bin/python3
-import ipaddress
-import TCPServer
+import sys
+from TCPServer import tcpconstatus
+import socket
+
+sys.path.append('/home/kitt/lcd/')
 import drivers
 
-lcddisplay = drivers.LCD()
+lcddisplay = drivers.Lcd()
 
 def LCDStandby():
-    ip = ipaddress.IPv4Address
-    while True:
+    HOSTNAME = socket.gethostname()
+    IP = socket.gethostbyname(HOSTNAME)
+    while tcpconstatus == False:
         lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
-        lcddisplay.lcd_display_string("IP: {ip}", 2)
+        lcddisplay.lcd_display_string(f"IP: {IP}", 2)
 
 
 
