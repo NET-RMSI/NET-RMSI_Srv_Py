@@ -11,13 +11,12 @@ import drivers
 
 lcddisplay = drivers.Lcd()
 
-def LCDStandby():
+def LCDINIT():
     HOSTNAME = socket.gethostname()
     IP = socket.gethostbyname(HOSTNAME)
     lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
     lcddisplay.lcd_display_string(f"IP: {IP}", 2)
     
-
 def LCDConnectiontrue():
     lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
     lcddisplay.lcd_display_string("Cli Connected", 2)

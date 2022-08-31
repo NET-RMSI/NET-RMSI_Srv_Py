@@ -2,11 +2,14 @@
 import socket
 
 
-tcpconstatus = False
+
 
 
 
 def TCPSRVINIT():
+
+   global tcpconstatus
+   tcpconstatus = False
 
    HOSTNAME = socket.gethostname()
    PORT = 13062
@@ -19,6 +22,5 @@ def TCPSRVINIT():
    tcpcli, address = tcpsrv.accept()
    with tcpcli:
       print(f"Connected by {address}")
-      global tcpconstatus
       tcpconstatus = True
-   
+      
