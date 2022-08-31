@@ -1,7 +1,10 @@
 #!/usr/bin/python3
+from pickle import TRUE
 import sys
-from TCPServer import tcpconstatus
+from time import time
 import socket
+
+LCDMODULEENABLED = TRUE
 
 sys.path.append('/home/kitt/lcd/')
 import drivers
@@ -11,9 +14,21 @@ lcddisplay = drivers.Lcd()
 def LCDStandby():
     HOSTNAME = socket.gethostname()
     IP = socket.gethostbyname(HOSTNAME)
-    while tcpconstatus == False:
-        lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
-        lcddisplay.lcd_display_string(f"IP: {IP}", 2)
+    lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
+    lcddisplay.lcd_display_string(f"IP: {IP}", 2)
+    
+
+def LCDConnectiontrue():
+    lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
+    lcddisplay.lcd_display_string("Cli Connected", 2)
+
+def LCDConnectionfalse():
+    lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
+    lcddisplay.lcd_display_string("No Connection", 2)
+
+
+
+
 
 
 

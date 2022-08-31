@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 import socket
 
+
 tcpconstatus = False
 
 
 
-def TCPSRV():
+def TCPSRVINIT():
 
    HOSTNAME = socket.gethostname()
    PORT = 13062
@@ -18,12 +19,6 @@ def TCPSRV():
    tcpcli, address = tcpsrv.accept()
    with tcpcli:
       print(f"Connected by {address}")
+      global tcpconstatus
       tcpconstatus = True
-      while True:
-         data = tcpcli.recv(1024)
-         if not data:
-            break
-         tcpcli.sendall(data)
-
-      
    
