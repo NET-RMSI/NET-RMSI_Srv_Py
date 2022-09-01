@@ -1,19 +1,18 @@
 #!/usr/bin/python3
-from pickle import TRUE
 import TCPServer, LCDController
 from TCPServer import tcpconstatus
 from LCDController import LCDMODULEENABLED
 
 
 
-if (LCDMODULEENABLED == TRUE):
+if (LCDMODULEENABLED == True):
     LCDController.LCDINIT()
     TCPServer.TCPSRVINIT()
 else:
     TCPServer.TCPSRVINIT()
 
-while(LCDMODULEENABLED == TRUE):
-    if(tcpconstatus == TRUE):
+while(LCDMODULEENABLED == True):
+    if(tcpconstatus == True):
         LCDController.LCDConnectiontrue()
     elif(tcpconstatus == False):
         print(f"{tcpconstatus}")
