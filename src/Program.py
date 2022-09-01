@@ -1,20 +1,26 @@
 #!/usr/bin/python3
 import TCPServer, LCDController
 from TCPServer import tcpconstatus
-from LCDController import LCDMODULEENABLED
+
+#Passthrough global vars required for vertification and data processing
+from TCPServer import data
+from TCPServer import conaddress
+
+from LCDController import lcdmoduleenabled
 
 
 
-if (LCDMODULEENABLED == True):
+if (lcdmoduleenabled == True):
     LCDController.LCDINIT()
     TCPServer.TCPSRVINIT()
 else:
     TCPServer.TCPSRVINIT()
 
-while(LCDMODULEENABLED == True):
-    if(tcpconstatus == True):
+while(lcdmoduleenabled == True):
+    if(TCPServer.TCPSRVINIT == True):
         LCDController.LCDConnectiontrue()
-    elif(tcpconstatus == False):
+        TCPServer.TCPDATACOLLECTION()
+    elif(TCPServer.TCPSRVINIT == False):
         print(f"{tcpconstatus}")
         LCDController.LCDConnectionfalse()
 

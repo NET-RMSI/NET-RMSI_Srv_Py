@@ -26,11 +26,14 @@ def TCPSRVINIT():
    with tcpcli:
       print(f"Connected by {address}")
       tcpconstatus = True
+
+      return True
       
 def TCPDATACOLLECTION():
    while (tcpconstatus == True):
       with tcpcli:
          global data
-         data = tcpcli.recvfrom(4096)
+         global conaddress
+         data, conaddress = tcpcli.recvfrom(4096)
    
          

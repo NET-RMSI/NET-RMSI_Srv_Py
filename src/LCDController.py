@@ -4,14 +4,17 @@ import sys
 from time import time
 import socket
 
-LCDMODULEENABLED = TRUE
 
 sys.path.append('/home/kitt/lcd/')
 import drivers
 
 lcddisplay = drivers.Lcd()
 
+
 def LCDINIT():
+    global lcdmoduleenabled
+    lcdmoduleenabled = False
+
     HOSTNAME = socket.gethostname()
     IP = socket.gethostbyname(HOSTNAME)
     lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
@@ -24,6 +27,9 @@ def LCDConnectiontrue():
 def LCDConnectionfalse():
     lcddisplay.lcd_display_string("NET-RMSI_SRV", 1)
     lcddisplay.lcd_display_string("No Connection", 2)
+
+
+
 
 
 
