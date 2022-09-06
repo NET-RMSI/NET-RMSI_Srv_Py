@@ -17,3 +17,15 @@ DEBUG:root:09/06/2022, 13:58:51 Logging started
 DEBUG:root:09/06/2022, 13:58:51 Starting TCPServer
 ERROR:root:09/06/2022, 13:58:51 [Errno 98] Address already in use
 CRITICAL:root:09/06/2022, 13:58:51 Terminating NET-RMSI_Srv_Py
+INFO:root:09/06/2022, 14:09:03 
+INFO:root:09/06/2022, 14:09:03 Logging started
+DEBUG:root:09/06/2022, 14:09:03 Starting TCPServer
+DEBUG:root:09/06/2022, 14:09:03 Bound to socket
+DEBUG:root:09/06/2022, 14:09:03 TCPServer listening
+DEBUG:root:09/06/2022, 14:09:03 Waiting for client to connect
+INFO:root:
+INFO:root:09/06/2022, 16:04:10 Logging started
+DEBUG:root:09/06/2022, 16:04:10 Starting TCPServer
+DEBUG:root:09/06/2022, 16:04:10 Bound to socket
+DEBUG:root:09/06/2022, 16:04:10 TCPServer listening
+DEBUG:root:09/06/2022, 16:04:10 Waiting for client to connect

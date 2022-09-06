@@ -7,7 +7,15 @@ def LOGGINGINIT():
 
     
     logging.basicConfig (filename= 'NET-RMSI_Srv_Py.log', encoding='utf-8', level=logging.DEBUG)
-    LOGEVENTS_DEBUG(f"Logging started")
+    
+    LOGEVENTS_INFO(f"Logging started")
+
+def LOGEVENTS_INFO(input):
+
+    currentdateandtime = datetime.datetime.now()
+    currentdateandtimestr = currentdateandtime.strftime("%m/%d/%Y, %H:%M:%S")
+    
+    logging.info(f"{currentdateandtimestr} " + input)
 
 def LOGEVENTS_DEBUG(input):
 
