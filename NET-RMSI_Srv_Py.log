@@ -1,0 +1,19 @@
+DEBUG:root:09/06/2022, 13:46:55 Logging started
+DEBUG:root:09/06/2022, 13:46:55 Starting TCPServer
+DEBUG:root:09/06/2022, 13:46:55 Bound to socket
+DEBUG:root:09/06/2022, 13:46:55 TCPServer listening
+DEBUG:root:09/06/2022, 13:46:55 Waiting for client to connect
+DEBUG:root:09/06/2022, 13:47:33 Logging started
+DEBUG:root:09/06/2022, 13:47:33 Starting TCPServer
+DEBUG:root:09/06/2022, 13:47:33 Bound to socket
+DEBUG:root:09/06/2022, 13:47:33 TCPServer listening
+DEBUG:root:09/06/2022, 13:47:33 Waiting for client to connect
+DEBUG:root:09/06/2022, 13:52:36 Logging started
+DEBUG:root:09/06/2022, 13:52:36 Starting TCPServer
+DEBUG:root:09/06/2022, 13:52:36 Bound to socket
+DEBUG:root:09/06/2022, 13:52:36 TCPServer listening
+DEBUG:root:09/06/2022, 13:52:36 Waiting for client to connect
+DEBUG:root:09/06/2022, 13:58:51 Logging started
+DEBUG:root:09/06/2022, 13:58:51 Starting TCPServer
+ERROR:root:09/06/2022, 13:58:51 [Errno 98] Address already in use
+CRITICAL:root:09/06/2022, 13:58:51 Terminating NET-RMSI_Srv_Py
