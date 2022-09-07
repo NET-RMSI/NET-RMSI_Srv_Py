@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 import TCPServer, LCDController, LoggerModule
 
-#Passthrough global vars required for vertification and data processing
-from LCDController import lcdmoduleenabled
+lcdmoduleenabled = True
 
 
 

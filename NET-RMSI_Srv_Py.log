@@ -29,3 +29,8 @@ DEBUG:root:09/06/2022, 16:04:10 Starting TCPServer
 DEBUG:root:09/06/2022, 16:04:10 Bound to socket
 DEBUG:root:09/06/2022, 16:04:10 TCPServer listening
 DEBUG:root:09/06/2022, 16:04:10 Waiting for client to connect
+INFO:root:09/07/2022, 12:05:59 Logging started
+DEBUG:root:09/07/2022, 12:05:59 Starting TCPServer
+DEBUG:root:09/07/2022, 12:05:59 Bound to socket
+DEBUG:root:09/07/2022, 12:05:59 TCPServer listening
+DEBUG:root:09/07/2022, 12:05:59 Waiting for client to connect
