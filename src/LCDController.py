@@ -4,7 +4,7 @@ import sys
 from time import time
 import socket
 
-
+#Enter location of LCD drivers directory
 sys.path.append('/home/kitt/lcd/')
 import drivers
 
