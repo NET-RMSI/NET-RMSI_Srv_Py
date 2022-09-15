@@ -9,6 +9,7 @@ def LOGGINGINIT():
     logging.basicConfig (filename= 'NET-RMSI_Srv_Py.log', encoding='utf-8', level=logging.DEBUG)
     
     LOGEVENTS_INFO(f"Logging started")
+    return True
 
 def LOGEVENTS_INFO(input):
 

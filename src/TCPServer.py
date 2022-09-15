@@ -4,12 +4,12 @@ import socket
 from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_DEBUG, LOGEVENTS_ERROR
 
 
-def TCPSRVINIT():
+def TCPSRVINIT(PORT):
 
    LOGEVENTS_DEBUG(f'Starting TCPServer')
 
    HOSTNAME = socket.gethostname()
-   PORT = 13062
+   #PORT = 13062
    IPADDRESS = socket.gethostbyname(HOSTNAME)
    
 
@@ -23,8 +23,8 @@ def TCPSRVINIT():
       LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
       quit()
    
-   tcpsrv.listen(1)
-   LOGEVENTS_DEBUG(f'TCPServer listening')
+   tcpsrv.listen(2)
+   LOGEVENTS_DEBUG(f'TCPServer listening on {PORT}')
    
    print(f"Waiting for a client to connect")
 

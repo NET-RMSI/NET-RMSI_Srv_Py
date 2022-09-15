@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import TCPServer, LCDController, LoggerModule
 
+
 #Change this value dependant if server hardware has a compatible LCD screen
 lcdmoduleenabled = True
 
