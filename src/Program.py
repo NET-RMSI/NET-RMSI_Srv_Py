@@ -10,15 +10,15 @@ lcdmoduleenabled = True
 if (lcdmoduleenabled == True):
     LCDController.LCDINIT()
     LoggerModule.LOGGINGINIT()
-    TCPServer.TCPSRVINIT()
+    TCPServer.TCPSRVMAIN()
     
 else:
     LoggerModule.LOGGINGINIT()
-    TCPServer.TCPSRVINIT()
+    TCPServer.TCPSRVMAIN()
 
 
 while(lcdmoduleenabled == True):
-    if(TCPServer.TCPSRVINIT == True):
+    if(TCPServer.TCPSRVMAIN == True):
         LCDController.LCDConnectiontrue()
         TCPServer.TCPDATACOLLECTION()
     elif(TCPServer.TCPSRVINIT == False):

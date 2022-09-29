@@ -1,19 +1,21 @@
 #!/usr/bin/python3
-from logging import Logger
 import socket
+import threading
+from _thread import *
 from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_DEBUG, LOGEVENTS_ERROR
+from DataProcessing import DATAPROCESSING
 
-
-def TCPSRVINIT(PORT):
+global tcpsrv, tcpcli, address
+def TCPSRVMAIN():
 
    LOGEVENTS_DEBUG(f'Starting TCPServer')
 
    HOSTNAME = socket.gethostname()
-   #PORT = 13062
+   PORT = 13062
    IPADDRESS = socket.gethostbyname(HOSTNAME)
    
 
-   global tcpsrv
+   
    tcpsrv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    try:
       tcpsrv.bind((IPADDRESS, PORT))
@@ -22,32 +24,30 @@ def TCPSRVINIT(PORT):
       LOGEVENTS_ERROR(f"{ex}")
       LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
       quit()
-   
-   tcpsrv.listen(2)
+
+   tcpsrv.listen(1)
    LOGEVENTS_DEBUG(f'TCPServer listening on {PORT}')
    
    print(f"Waiting for a client to connect")
 
    LOGEVENTS_DEBUG(f'Waiting for client to connect')
-   global tcpcli, address
-   tcpcli, address = tcpsrv.accept()
-   with tcpcli:
-      print(f"Connected by {address}")
+   #global tcpsrv
+   #tcpcli, address = tcpsrv.accept()
+   #threadhandoff = threading.Thread(tcpcli, address)
+   #threadhandoff.start()
+   #with tcpcli:
+   #   print(f"Connected by {address}")
       
-      LOGEVENTS_DEBUG(f'Connected by {address}')
+   #   LOGEVENTS_DEBUG(f'Connected by {address}')
 
-      return True
-      
-def TCPDATACOLLECTION():
+   #   return True
    while True:
-      with tcpcli:
-         data = tcpcli.recv(4096)
-         if not data:
-            break
+      SRVACCEPTCON(tcpsrv)
 
-
-         
-         
-
-   
-         
+def SRVACCEPTCON(tcpsrv):
+   tcpcli, address = tcpsrv.accept()
+   print(f"Connected to {address}")
+   LOGEVENTS_DEBUG(f"Connected to {address}")
+   threading.Thread(target=DATAPROCESSING(tcpcli)).start()
+      
+    
