@@ -5,6 +5,7 @@ from LoggerModule import *
 from DataProcessing import *
 
 global tcpsrv, tcpcli, address
+
 def TCPSRVMAIN():
 
    LOGEVENTS_DEBUG(f'Starting TCPServer')
@@ -12,8 +13,6 @@ def TCPSRVMAIN():
    HOSTNAME = socket.gethostname()
    PORT = 13062
    IPADDRESS = socket.gethostbyname(HOSTNAME)
-   
-
    
    tcpsrv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    try:
@@ -30,16 +29,7 @@ def TCPSRVMAIN():
    print(f"Waiting for a client to connect")
 
    LOGEVENTS_DEBUG(f'Waiting for client to connect')
-   #global tcpsrv
-   #tcpcli, address = tcpsrv.accept()
-   #threadhandoff = threading.Thread(tcpcli, address)
-   #threadhandoff.start()
-   #with tcpcli:
-   #   print(f"Connected by {address}")
-      
-   #   LOGEVENTS_DEBUG(f'Connected by {address}')
-
-   #   return True
+   
    while True:
       SRVACCEPTCON(tcpsrv)
 

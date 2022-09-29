@@ -9,6 +9,9 @@ from TCPServer import *
 lcdmoduleenabled = False
 
 
+global serverversion = "001"
+
+
 
 if (lcdmoduleenabled == True and __name__ == '__main__'):
     LCDINIT()
