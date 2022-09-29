@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 import socket
 import threading
-from _thread import *
-from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_DEBUG, LOGEVENTS_ERROR
-from DataProcessing import DATAPROCESSING
+from LoggerModule import *
+from DataProcessing import *
 
 global tcpsrv, tcpcli, address
 def TCPSRVMAIN():
