@@ -1,5 +1,6 @@
 from http import server
 import socket
+import os
 
 from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_ERROR, LOGEVENTS_INFO
 
@@ -14,8 +15,12 @@ def DATAPROCESSING(cliconn):
    controlledcli = "CD001"
 
    while True:
-      cliconn.send(f"{serverversion}")
-      cliid = cliconn.recvmsg(4096)
+      with cliconn:
+         socket.socket.send(f"{serverversion}")
+         cliid = socket.socket.recvmsg(4096)
+      
+      #cliconn.send(f"{serverversion}")
+      #cliid = cliconn.recvmsg(4096)
 
       if cliid == f"{serverversion}":
          LOGEVENTS_ERROR(f"{serverversion} Identified")

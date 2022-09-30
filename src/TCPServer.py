@@ -8,7 +8,7 @@ global tcpsrv, tcpcli, address
 
 def TCPSRVMAIN():
 
-   LOGEVENTS_DEBUG(f'Starting TCPServer')
+   LOGEVENTS_DEBUG("Starting TCPServer")
 
    HOSTNAME = socket.gethostname()
    PORT = 13062
@@ -17,18 +17,18 @@ def TCPSRVMAIN():
    tcpsrv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    try:
       tcpsrv.bind((IPADDRESS, PORT))
-      LOGEVENTS_DEBUG(f'Bound to socket')
+      LOGEVENTS_DEBUG("Bound to socket")
    except Exception as ex:
       LOGEVENTS_ERROR(f"{ex}")
       LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
       quit()
 
    tcpsrv.listen(1)
-   LOGEVENTS_DEBUG(f'TCPServer listening on {PORT}')
+   LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
    
-   print(f"Waiting for a client to connect")
+   print("Waiting for a client to connect")
 
-   LOGEVENTS_DEBUG(f'Waiting for client to connect')
+   LOGEVENTS_DEBUG('Waiting for client to connect')
    
    while True:
       SRVACCEPTCON(tcpsrv)

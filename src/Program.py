@@ -9,7 +9,6 @@ from TCPServer import *
 lcdmoduleenabled = False
 
 
-global serverversion = "001"
 
 
 
