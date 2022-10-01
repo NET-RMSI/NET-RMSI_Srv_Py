@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import socket
+import sys
 #Enter location of LCD drivers directory
 sys.path.append('/home/kitt/lcd/')
 import drivers
