@@ -1,6 +1,7 @@
 from distutils.debug import DEBUG
 import datetime
 import logging
+from _global import *
 
 
 def LOGGINGINIT():
@@ -9,7 +10,8 @@ def LOGGINGINIT():
     logging.basicConfig (filename= 'NET-RMSI_Srv_Py.log', encoding='utf-8', level=logging.DEBUG)
     
     LOGEVENTS_INFO(f"Logging started")
-    return True
+    LOGEVENTS_INFO(f"Server Version: {serverversion}")
+    
 
 def LOGEVENTS_INFO(input):
 

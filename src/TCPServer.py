@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import socket
 import threading
+from _global import *
 from LoggerModule import *
 from DataProcessing import *
 
@@ -9,10 +10,6 @@ global tcpsrv, tcpcli, address
 def TCPSRVMAIN():
 
    LOGEVENTS_DEBUG("Starting TCPServer")
-
-   HOSTNAME = socket.gethostname()
-   PORT = 13062
-   IPADDRESS = socket.gethostbyname(HOSTNAME)
    
    tcpsrv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    try:

@@ -3,13 +3,7 @@ import threading
 from LoggerModule import *
 from LCDController import *
 from TCPServer import *
-
-
-#Change this value dependant if server hardware has a compatible LCD screen
-lcdmoduleenabled = False
-
-
-
+from _global import *
 
 
 if (lcdmoduleenabled == True and __name__ == '__main__'):
@@ -18,6 +12,8 @@ if (lcdmoduleenabled == True and __name__ == '__main__'):
     task0 = threading.Thread(target=LOGGINGINIT)
     task0.start()
     task0.join()
+
+    threading.Thread(target=LCDROUTINE).start()
 
     TCPSRVMAIN()
 

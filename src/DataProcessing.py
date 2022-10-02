@@ -2,18 +2,11 @@ from http import server
 import socket
 import os
 
+from _global import *
 from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_ERROR, LOGEVENTS_INFO
-
-
 
 def DATAPROCESSING(cliconn):
    
-   global serverversion,controlledcli,controllercli
-
-   serverversion = "SV001"
-   controllercli = "CR001"
-   controlledcli = "CD001"
-
    while True:
       with cliconn:
          socket.socket.send(f"{serverversion}")
