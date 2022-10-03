@@ -4,27 +4,22 @@ from LoggerModule import *
 from TCPServer import *
 from _global import *
 
-LOGGINGINIT()
-
-try:
-      from LCDController import *
-except Exception as ex:
-    LOGEVENTS_ERROR(f"{ex}")
     
 if (__name__ == '__main__'):
+
+#Start logging.
+    LOGGINGINIT()
     
     try:
+        from LCDController import *
         LCDINIT()
-    except Exception as ex:
-        LOGEVENTS_ERROR(f"{ex}")
-        
-    try:
         threading.Thread(target=LCDROUTINE).start()
     except Exception as ex:
         LOGEVENTS_ERROR(f"{ex}")
         LOGEVENTS_INFO("Ignore above errors if LCD module has not been installed due to lack of an LCD screen on/or connected to the hardware")
         LOGEVENTS_INFO("Ensure sys.path.append(DIR HERE) has been set in LCDController.py to match driver installation directory")
     
+   
     TCPSRVMAIN()
 
 else:
