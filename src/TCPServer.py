@@ -18,7 +18,7 @@ def TCPSRVMAIN():
    except Exception as ex:
       LOGEVENTS_ERROR(f"{ex}")
       LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
-      quit()
+      quit(code=1)
 
    tcpsrv.listen(1)
    LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")

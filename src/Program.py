@@ -30,7 +30,7 @@ if (__name__ == '__main__'):
 else:
     LOGEVENTS_ERROR("Attempted code execution from an indirect source")
     LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
-    quit()
+    quit(code=1)
     
 
 
