@@ -20,7 +20,7 @@ def TCPSRVMAIN():
       LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
       quit(code=1)
 
-   tcpsrv.listen(1)
+   tcpsrv.listen(4)
    LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
    
    print("Waiting for a client to connect")

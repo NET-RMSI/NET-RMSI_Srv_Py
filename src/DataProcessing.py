@@ -9,7 +9,7 @@ def DATAPROCESSING(cliconn):
    
    while True:
       with cliconn:
-         socket.socket.send(f"{serverversion}")
+         socket.socket.send(f"{serverversion.encode()}")
          cliid = socket.socket.recvmsg(4096)
       
       #cliconn.send(f"{serverversion}")
