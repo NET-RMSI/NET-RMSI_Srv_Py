@@ -22,8 +22,6 @@ def TCPSRVMAIN():
 
    tcpsrv.listen(4)
    LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
-   
-   print("Waiting for a client to connect")
 
    LOGEVENTS_DEBUG('Waiting for client to connect')
    
@@ -32,7 +30,6 @@ def TCPSRVMAIN():
 
 def SRVACCEPTCON(tcpsrv):
    tcpcli, cliaddress = tcpsrv.accept()
-   print(f"Connected to {cliaddress}")
    LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
    threading.Thread(target=DATAPROCESSING(tcpcli, cliaddress)).start()
       

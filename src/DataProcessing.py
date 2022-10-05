@@ -14,8 +14,8 @@ def DATAPROCESSING(cliconn, connaddress):
    elif cliid == f"{controlledcli}":
       LOGEVENTS_INFO(f"{controlledcli} at {connaddress} identified")
    else:
-      LOGEVENTS_ERROR("Failed to recieve client identifier, unknown client")
-      LOGEVENTS_ERROR(f"Closing connection to {connaddress}")
+      LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
+      LOGEVENTS_CRITICAL(f"Closing connection to {connaddress}")
       cliconn.close()
       return
          

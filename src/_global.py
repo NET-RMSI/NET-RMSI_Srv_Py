@@ -6,6 +6,7 @@ serverversion = "SV001"
 controllercli = "CR001"
 controlledcli = "CD001"
 
+
 HOSTNAME = socket.gethostname()
 PORT = 13062
 
