@@ -5,7 +5,7 @@ from _global import *
 from LoggerModule import *
 from DataProcessing import *
 
-global tcpsrv, tcpcli, address
+global tcpsrv, tcpcli, cliaddress
 
 def TCPSRVMAIN():
 
@@ -31,9 +31,9 @@ def TCPSRVMAIN():
       SRVACCEPTCON(tcpsrv)
 
 def SRVACCEPTCON(tcpsrv):
-   tcpcli, address = tcpsrv.accept()
-   print(f"Connected to {address}")
-   LOGEVENTS_DEBUG(f"Connected to {address}")
-   threading.Thread(target=DATAPROCESSING(tcpcli)).start()
+   tcpcli, cliaddress = tcpsrv.accept()
+   print(f"Connected to {cliaddress}")
+   LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
+   threading.Thread(target=DATAPROCESSING(tcpcli, cliaddress)).start()
       
     

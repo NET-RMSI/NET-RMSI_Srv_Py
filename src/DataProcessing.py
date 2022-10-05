@@ -1,31 +1,26 @@
-from http import server
 import socket
-import os
-
 from _global import *
 from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_ERROR, LOGEVENTS_INFO
 
-def DATAPROCESSING(cliconn):
+def DATAPROCESSING(cliconn, connaddress):
    
-   while True:
-      with cliconn:
-         socket.socket.send(f"{serverversion.encode()}")
-         cliid = socket.socket.recvmsg(4096)
-      
-      #cliconn.send(f"{serverversion}")
-      #cliid = cliconn.recvmsg(4096)
+   
+   with cliconn:
+      socket.socket.send(f"{serverversion.encode()}")
+      cliid = socket.socket.recvmsg(4096)
+   
+   if cliid == f"{controllercli}":
+      LOGEVENTS_INFO(f"{controllercli} at {connaddress} identified")
+   elif cliid == f"{controlledcli}":
+      LOGEVENTS_INFO(f"{controlledcli} at {connaddress} identified")
+   else:
+      LOGEVENTS_ERROR("Failed to recieve client identifier, unknown client")
+      LOGEVENTS_ERROR(f"Closing connection to {connaddress}")
+      cliconn.close()
+      return
+         
 
-      if cliid == f"{serverversion}":
-         LOGEVENTS_ERROR(f"{serverversion} Identified")
-         LOGEVENTS_CRITICAL("Another Server attempted to connect to the server")
-         LOGEVENTS_CRITICAL("Closing Connection")
-         cliconn.close()
-         LOGEVENTS_CRITICAL("Terminating NET-RMSI_Srv_Py")
-         quit()
-      elif cliid == f"{controllercli}":
-         LOGEVENTS_INFO(f"{controllercli} Identified")
-      elif cliid == f"{controlledcli}":
-         LOGEVENTS_INFO(f"{controlledcli} Identified")
+         
 
    
 
