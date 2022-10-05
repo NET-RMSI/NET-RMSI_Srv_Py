@@ -6,8 +6,8 @@ def DATAPROCESSING(cliconn, connaddress):
    
    
    with cliconn:
-      socket.socket.send(f"{serverversion.encode()}")
-      cliid = socket.socket.recvmsg(4096)
+      cliconn.send(f"{serverversion.encode()}")
+      cliid = cliconn.recvmsg(4096)
    
    if cliid == f"{controllercli}":
       LOGEVENTS_INFO(f"{controllercli} at {connaddress} identified")
