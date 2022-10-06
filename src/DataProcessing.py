@@ -2,7 +2,7 @@ import socket
 from _global import *
 from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_ERROR, LOGEVENTS_INFO
 
-def DATAPROCESSING(cliconn, connaddress):
+def CLIENTIDENTIF(cliconn, connaddress):
    
    
    with cliconn:

@@ -20,7 +20,7 @@ def TCPSRVMAIN():
       LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
       quit(code=1)
 
-   tcpsrv.listen(4)
+   tcpsrv.listen(2)
    LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
 
    LOGEVENTS_DEBUG('Waiting for client to connect')
@@ -31,6 +31,6 @@ def TCPSRVMAIN():
 def SRVACCEPTCON(tcpsrv):
    tcpcli, cliaddress = tcpsrv.accept()
    LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
-   threading.Thread(target=DATAPROCESSING(tcpcli, cliaddress)).start()
+   threading.Thread(target=CLIENTIDENTIF(tcpcli, cliaddress)).start()
       
     

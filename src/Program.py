@@ -17,7 +17,6 @@ if (__name__ == '__main__'):
     except Exception as ex:
         LOGEVENTS_ERROR(f"{ex}")
         LOGEVENTS_INFO("Ignore above errors if LCD module has not been installed due to lack of an LCD screen on/or connected to the hardware")
-        LOGEVENTS_INFO("Ensure sys.path.append(DIR HERE) has been set in LCDController.py to match driver installation directory")
     
     TCPSRVMAIN()
 

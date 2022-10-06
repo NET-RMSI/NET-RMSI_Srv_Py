@@ -2,9 +2,9 @@
 import socket
 
 
-serverversion = "SV001"
-controllercli = "CR001"
-controlledcli = "CD001"
+serverversion = "SV100"
+controllercli = "CR100"
+controlledcli = "CD100"
 
 
 HOSTNAME = socket.gethostname()
