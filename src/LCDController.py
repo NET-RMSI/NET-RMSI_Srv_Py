@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-import socket
-import sys
 from _global import *
 from time import sleep
 import rpi_lcd

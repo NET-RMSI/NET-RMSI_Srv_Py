@@ -1,4 +1,3 @@
-import socket
 from _global import *
 from LoggerModule import LOGEVENTS_CRITICAL, LOGEVENTS_ERROR, LOGEVENTS_INFO
 
@@ -13,6 +12,8 @@ def CLIENTIDENTIF(cliconn, connaddress):
       LOGEVENTS_INFO(f"{controllercli} at {connaddress} identified")
    elif cliid == f"{controlledcli}":
       LOGEVENTS_INFO(f"{controlledcli} at {connaddress} identified")
+
+      
    else:
       LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
       LOGEVENTS_CRITICAL(f"Closing connection to {connaddress}")
