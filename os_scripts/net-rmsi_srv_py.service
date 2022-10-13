@@ -1,0 +1,15 @@
+[Unit]
+Description = NET-RMSI Server instance
+After = network.target 
+ 
+[Service]
+Type = simple
+ExecStart = python <dir>
+User = 
+Group = 
+Restart = on-failure 
+RestartSec = 5
+TimeoutStartSec = infinity
+ 
+[Install]
+WantedBy = multi-user.target 
