@@ -6,3 +6,10 @@ Written in Python deriving from the Windows build developed in C#, allows for th
 
 
 Documentation for NET-RMSI_Srv_Py can be in the [Wiki](https://github.com/NET-RMSI/NET-RMSI_Srv_Py/wiki) section of this repo.
+
+***
+
+Branch layout is as follows:
+* dev - Current WIP version of the software where new features are added often in stages, therefore making dev unsuitable for production.
+* main - Current stable version of the software.
+* version-x.x.x - Current bleeding-edge version of the software, along with legacy versions and codebases.
