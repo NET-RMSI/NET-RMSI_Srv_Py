@@ -10,6 +10,7 @@ Documentation for NET-RMSI_Srv_Py can be in the [Wiki](https://github.com/NET-RM
 ***
 
 Branch layout is as follows:
-* dev - Current WIP version of the software where new features are added often in stages, therefore making dev unsuitable for production.
-* main - Current stable version of the software.
-* version-x.x.x - Current bleeding-edge version of the software, along with legacy versions and codebases.
+* dev - Development branch, features are added often in stages and are not always fully functional as they get worked on, therefore making dev unsuitable for production.
+* stable - Current stable version of the software.
+* version-x.x.x - Legacy versions and codebases.
+* bleeding-edge - Newest features with full functionality but may contain bugs.
