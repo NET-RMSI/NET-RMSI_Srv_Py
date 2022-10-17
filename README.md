@@ -10,7 +10,7 @@ Documentation for NET-RMSI_Srv_Py can be in the [Wiki](https://github.com/NET-RM
 ***
 
 Branch layout is as follows:
-* dev - Development branch, features are added often in stages and are not always fully functional as they get worked on, therefore making dev unsuitable for production.
-* stable - Current stable version of the software.
+* [dev](https://github.com/NET-RMSI/NET-RMSI_Srv_Py/blob/dev/) - Development branch, features are added often in stages and are not always fully functional as they get worked on, therefore making dev unsuitable for production.
+* [stable](https://github.com/NET-RMSI/NET-RMSI_Srv_Py/blob/stable/) - Current stable version of the software.
 * version-x.x.x - Legacy versions and codebases.
-* bleeding-edge - Newest features with full functionality but may contain bugs.
+* [bleeding-edge](https://github.com/NET-RMSI/NET-RMSI_Srv_Py/blob/bleedig-edge/) - Newest features with full functionality but may contain bugs.
