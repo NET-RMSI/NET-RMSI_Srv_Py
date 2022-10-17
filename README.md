@@ -14,3 +14,6 @@ Branch layout is as follows:
 * [stable](https://github.com/NET-RMSI/NET-RMSI_Srv_Py/tree/stable/) - Current stable version of the software.
 * [bleeding-edge](https://github.com/NET-RMSI/NET-RMSI_Srv_Py/tree/bleeding-edge/) - Newest features with full functionality but may contain bugs.
 * version-x.x.x - Legacy versions and codebases.
+
+***
+Development progress and roadmap can be found [here](https://github.com/orgs/NET-RMSI/projects/2)
