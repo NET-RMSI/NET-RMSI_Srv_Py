@@ -14,5 +14,5 @@ PORT = 13062
 
 DBIPADDRESS = ''
 DBPORT = ''
-
+DBNAME = "srv_pconndb"
  
