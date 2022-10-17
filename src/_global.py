@@ -7,10 +7,12 @@ controllercli = "CR100"
 controlledcli = "CD100"
 
 
-HOSTNAME = socket.gethostname()
+
+IPADDRESS = ''
 PORT = 13062
 
-#IPADDRESS = socket.gethostbyname(HOSTNAME)
-#Comment out the above if running the server on a unix based system, testing indicates that parsing the IP address leads to listening on localhost.
-#IPADRESS = '' Listens on all ports, if a specific adress is needed replace the field with so.
-IPADDRESS = '' 
+
+DBIPADDRESS = ''
+DBPORT = ''
+
+ 
