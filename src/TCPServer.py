@@ -3,6 +3,7 @@ import socket
 import threading
 from _global import *
 from LoggerModule import *
+from ThreadHandling import *
 
 global tcpsrv, tcpcli, cliaddress
 
@@ -19,7 +20,7 @@ def TCPSRVMAIN():
       LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
       quit(code=1)
 
-   tcpsrv.listen(2)
+   tcpsrv.listen(4)
    LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
 
    LOGEVENTS_DEBUG('Waiting for client to connect')
@@ -44,10 +45,17 @@ def CLIENTIDENTIF(cliconn, connaddress):
       cliconn.send("valid".encode())
       LOGEVENTS_INFO(f"Recieved: {cliid}")
       LOGEVENTS_INFO(f"{controllercli} at {connaddress} identified")
+      CTRLHANDLING(cliconn)
+
+
    elif cliid == f"{controlledcli}":
       cliconn.send("valid".encode())
       LOGEVENTS_INFO(f"Recieved: {cliid}")
       LOGEVENTS_INFO(f"{controlledcli} at {connaddress} identified")
+      CTRLDHANDLING(cliconn)
+      
+
+
 
       
    else:

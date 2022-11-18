@@ -8,8 +8,10 @@ def DBHANDLER(address, status):
     
 
     dbcheck = dbclient.list_database_names()
+    
     if DBNAME in dbcheck:
         LOGEVENTS_INFO(f"{DBNAME} Exists on mongodb server")
+
 
         dbclient.close()
 
