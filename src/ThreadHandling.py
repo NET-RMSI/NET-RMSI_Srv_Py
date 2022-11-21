@@ -2,18 +2,26 @@ import threading
 import queue
 from LoggerModule import *
 import random
+import socket
 
 tcpqueue = queue.Queue()
 
 # Controller client handling handoff to tcp threads assigned a controlled client.
-def CTRLHANDLING(associp, execcmd):
+# cliconn - Tcp server instance.
+# associp - ip address of intended command recipient. 
+def CTRLHANDLING(cliconn):
     while True:
         # Insert code here to allow webserver/bot to control through tcp.
+        
+        execcmd = cliconn.recv()
+        
         tcpqueue.put(associp, execcmd)
 
 
 # Controlled client handling incoming commands from other threads and carrying out exec.
-def CTRLDHANDLING(connaddress):
+# cliconn - Tcp server instance.
+# connaddress - tcp ip address of connected client
+def CTRLDHANDLING(cliconn, connaddress):
     while True:
         threading.Lock.acquire()
         try:
@@ -30,6 +38,7 @@ def CTRLDHANDLING(connaddress):
 
         if execcmd != 0 | 1 :
             LOGEVENTS_ERROR(f"Invalid execution command sent to client thread: {execcmd}")
+            tcpqueue.task_done()
         
         elif associp == connaddress:
             LOGEVENTS_INFO(f"Matching client IP and command recieved: IP: {associp} Command: {execcmd} ")

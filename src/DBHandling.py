@@ -13,6 +13,7 @@ def DBHANDLER(address, status):
         LOGEVENTS_INFO(f"{DBNAME} Exists on mongodb server")
 
 
+
         dbclient.close()
 
     else:
