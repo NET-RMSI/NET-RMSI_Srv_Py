@@ -4,9 +4,10 @@ import threading
 from _global import *
 from LoggerModule import *
 from ThreadHandling import *
+from TCPClient import * 
 
 global tcpsrv, tcpcli, cliaddress
-
+            
 class TCPServer:
    def __init__(self, ipaddress, port):
       
@@ -30,20 +31,24 @@ class TCPServer:
          quit(code=1)
    
    def accept_connections(self):
+      
       self.socket_open()
       self.tcpserver.listen(4)
+      
       LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
       LOGEVENTS_DEBUG('Waiting for client to connect')
       
       while True:
          tcpcli, (cliaddress, cliport) = self.tcpserver.accept()
+         LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
          
-         client = (cliaddress, cliport, tcpcli)
-         self.clients.append(client)
+         tcpclient = TCPClient(cliaddress, cliport, tcpcli).start()
          
-         #LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
-         #threading.Thread(target=CLIENTIDENTIF(tcpcli, cliaddress)).start()
-         # Add client class for threading above please!
+         self.clients.append(tcpclient)
+         
+         self.tcpserver.close()
+         
+       
          
       
          
@@ -52,7 +57,7 @@ class TCPServer:
          
          
       
-      
+'''      
    
 def TCPSRVMAIN():
 
@@ -81,31 +86,4 @@ def SRVACCEPTCON(tcpsrv):
    LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
    threading.Thread(target=CLIENTIDENTIF(tcpcli, cliaddress)).start()
 
-
-def CLIENTIDENTIF(cliconn, cliaddress):
-   
-   # Check if client version is compatable with the server version
-   cliconn.settimeout(10.0)
-   cliid = cliconn.recv(4096).decode('utf-8')
-   
-   if cliid == f"{controllercli}":
-      cliconn.send("valid".encode())
-      LOGEVENTS_INFO(f"Recieved: {cliid}")
-      LOGEVENTS_INFO(f"{controllercli} at {cliaddress} identified")
-      CTRLHANDLING(cliconn)
-
-   elif cliid == f"{controlledcli}":
-      cliconn.send("valid".encode())
-      LOGEVENTS_INFO(f"Recieved: {cliid}")
-      LOGEVENTS_INFO(f"{controlledcli} at {cliaddress} identified")
-      CTRLDHANDLING(cliconn, cliaddress)
-      
-   else:
-      cliconn.send("invalid".encode())
-      LOGEVENTS_INFO(f"Recieved: {cliid}")
-      LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
-      LOGEVENTS_CRITICAL(f"Closing connection to {cliaddress}")
-      cliconn.close()
-      return
-      
-    
+'''
