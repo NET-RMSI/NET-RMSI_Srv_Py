@@ -44,11 +44,11 @@ class TCPServer:
          
          tcpclient = TCPClient(cliaddress, cliport, tcpcli).start()
          
+         
+         
          self.clients.append(tcpclient)
          
-         self.tcpserver.close()
-         
-       
+      
          
       
          
