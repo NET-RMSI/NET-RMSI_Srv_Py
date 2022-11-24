@@ -4,10 +4,7 @@ import threading
 from _global import *
 from LoggerModule import *
 from ThreadHandling import *
-from TCPClient import * 
 
-global tcpsrv, tcpcli, cliaddress
-            
 class TCPServer:
    def __init__(self, ipaddress, port):
       
@@ -16,9 +13,9 @@ class TCPServer:
       
       self.srvaddress = (self.ipaddress, self.port)
       self.tcpserver = None
-      self.clients = []
-   
-   def socket_open(self):
+      self.clients = []      
+      
+   def TCPServerinit(self):
       
       self.tcpserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
       try:
@@ -30,32 +27,82 @@ class TCPServer:
          self.tcpserver.close()
          quit(code=1)
    
-   def accept_connections(self):
       
-      self.socket_open()
       self.tcpserver.listen(4)
       
       LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
       LOGEVENTS_DEBUG('Waiting for client to connect')
       
       while True:
+         
          tcpcli, (cliaddress, cliport) = self.tcpserver.accept()
          LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
          
-         tcpclient = TCPClient(cliaddress, cliport, tcpcli).start()
+         self.tcpserver.settimeout(10.0)
+         indata = self.tcpserver.recv(4096).decode('utf-8')
+       
+         if indata == f"{controllercli}":
+            self.tcpserver.send("valid".encode())
+            LOGEVENTS_INFO(f"Recieved: {indata}")
+            LOGEVENTS_INFO(f"{controllercli} at {self.ipaddress} identified")
+            clitype = controllercli
+            
+            
+            #CTRLHANDLING(cliconn)
+
+         elif indata == f"{controlledcli}":
+            self.tcpserver.send("valid".encode())
+            LOGEVENTS_INFO(f"Recieved: {indata}")
+            LOGEVENTS_INFO(f"{controlledcli} at {self.ipaddress} identified")
+            clitype = controlledcli
+            #CTRLDHANDLING(cliconn, cliaddress)
+      
+         else:
+            self.tcpserver.send("invalid".encode())
+            LOGEVENTS_INFO(f"Recieved: {indata}")
+            LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
+            LOGEVENTS_CRITICAL(f"Closing connection to {self.ipaddress}")
+            self.tcpserver.close()
          
+         tcpclient = Clienthandling(cliaddress, cliport, tcpcli, clitype).start()
          
+         # Append the above with addition of client type for easier referencing.
          
          self.clients.append(tcpclient)
+   
+ 
          
-      
-         
-      
-         
-         
+'''
 
-         
-         
+def CLIENTIDENTIF(cliconn, cliaddress):
+   
+   # Check if client version is compatable with the server version
+   cliconn.settimeout(10.0)
+   cliid = cliconn.recv(4096).decode('utf-8')
+   
+   if cliid == f"{controllercli}":
+      cliconn.send("valid".encode())
+      LOGEVENTS_INFO(f"Recieved: {cliid}")
+      LOGEVENTS_INFO(f"{controllercli} at {cliaddress} identified")
+      CTRLHANDLING(cliconn)
+
+   elif cliid == f"{controlledcli}":
+      cliconn.send("valid".encode())
+      LOGEVENTS_INFO(f"Recieved: {cliid}")
+      LOGEVENTS_INFO(f"{controlledcli} at {cliaddress} identified")
+      CTRLDHANDLING(cliconn, cliaddress)
+      
+   else:
+      cliconn.send("invalid".encode())
+      LOGEVENTS_INFO(f"Recieved: {cliid}")
+      LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
+      LOGEVENTS_CRITICAL(f"Closing connection to {cliaddress}")
+      cliconn.close()
+      return
+      
+    
+'''
+      
       
 '''      
    

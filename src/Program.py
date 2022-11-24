@@ -18,7 +18,7 @@ if (__name__ == '__main__'):
         LOGEVENTS_ERROR(f"{ex}")
         LOGEVENTS_INFO("Ignore above errors if LCD module has not been installed due to lack of an LCD screen on/or connected to the hardware")
     
-    TCPServer(IPADDRESS, PORT).accept_connections()
+    TCPServer(IPADDRESS, PORT).TCPServerinit()
 
 else:
     LOGEVENTS_ERROR("Attempted code execution from an indirect source")

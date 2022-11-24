@@ -4,6 +4,57 @@ from LoggerModule import *
 import random
 import socket
 
+class Clienthandling(threading.Thread):
+    def __init__(self, ipaddress, port, connection, type):
+        threading.Thread.__init__(self)
+        self.ipaddress = ipaddress
+        self.port = port
+      
+        self.connection = connection
+        
+        self.type = type
+    
+    def CtrlrHandling(self):
+        while True:
+        # Insert code here to allow webserver/bot to control through tcp.
+        
+            execcmd = self.connection.recv()
+        
+            
+
+    
+    def CtrldHandling(self):
+        pass
+        
+    def run(self):
+        if self.type == controlledcli:
+            Clienthandling.CtrldHandling(self)
+        elif self.type == controllercli:
+            Clienthandling.CtrlrHandling(self)
+            pass
+        
+        
+        
+        
+    
+    
+      
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 tcpqueue = queue.Queue()
 
 # Controller client handling handoff to tcp threads assigned a controlled client.
@@ -49,3 +100,5 @@ def CTRLDHANDLING(cliconn, connaddress):
             LOGEVENTS_INFO(f"IP mismatch for client attached to thread, recieved: IP: {associp} ")
             tcpqueue.put(associp, execcmd)
             tcpqueue.task_done()
+            
+'''
