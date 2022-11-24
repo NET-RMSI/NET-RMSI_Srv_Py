@@ -24,10 +24,11 @@ class ClientHandling(threading.Thread):
         # Insert code here to allow webserver/bot to control through tcp.
                 self.cmdipaddr, self.execcmd = str.split(self.connection.recv(4096), sep='/')
             
+            # Possibly another solution would be for this code to be called from the server.
                 for tcpclient in clientlist: 
                 # Insert ipaddress var requested by the controller client
                     if tcpclient.clitype == controlledcli & tcpclient.cliaddress == self.cmdipaddr:  
-                        self.connection.send(self.execcmd)
+                        tcpclient.connection.send(self.execcmd)
                         
         elif self.type == controlledcli:
             LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")
