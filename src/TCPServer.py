@@ -2,8 +2,10 @@
 import socket
 import threading
 from _global import *
-from LoggerModule import *
-from ThreadHandling import *
+from EventLogging import *
+from ClientHandling import *
+
+clientlist = []
 
 class TCPServer:
    def __init__(self, ipaddress, port):
@@ -13,7 +15,7 @@ class TCPServer:
       
       self.srvaddress = (self.ipaddress, self.port)
       self.tcpserver = None
-      self.clients = []      
+      #self.clientlist[]
       
    def TCPServerinit(self):
       
@@ -64,11 +66,11 @@ class TCPServer:
             LOGEVENTS_CRITICAL(f"Closing connection to {self.ipaddress}")
             self.tcpserver.close()
          
-         tcpclient = Clienthandling(cliaddress, cliport, tcpcli, clitype).start()
+         tcpclient = ClientHandling(cliaddress, cliport, tcpcli, clitype).start()
          
          # Append the above with addition of client type for easier referencing.
          
-         self.clients.append(tcpclient)
+         clientlist.append(tcpclient)
    
  
          

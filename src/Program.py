@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import threading
-from LoggerModule import *
+from EventLogging import *
 from TCPServer import *
 from _global import *
 
@@ -8,7 +8,7 @@ from _global import *
 if (__name__ == '__main__'):
 
 #Start logging.
-    LOGGINGINIT()
+    LoggingInit()
     
     try:
         from LCDController import *

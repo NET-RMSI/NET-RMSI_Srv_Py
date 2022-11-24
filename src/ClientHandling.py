@@ -1,10 +1,11 @@
 import threading
 import queue
-from LoggerModule import *
-import random
+from EventLogging import *
+from TCPServer import clientlist
 import socket
+from _global import *
 
-class Clienthandling(threading.Thread):
+class ClientHandling(threading.Thread):
     def __init__(self, ipaddress, port, connection, type):
         threading.Thread.__init__(self)
         self.ipaddress = ipaddress
@@ -23,10 +24,10 @@ class Clienthandling(threading.Thread):
         # Insert code here to allow webserver/bot to control through tcp.
                 self.cmdipaddr, self.execcmd = str.split(self.connection.recv(4096), sep='/')
             
-                for client in self.clients :  
+                for tcpclient in clientlist: 
                 # Insert ipaddress var requested by the controller client
-                    if client.type == controlledcli & client.ipaddress == self.cmdipaddr:  
-                        client.connection.send(self.execcmd)
+                    if tcpclient.clitype == controlledcli & tcpclient.cliaddress == self.cmdipaddr:  
+                        self.connection.send(self.execcmd)
                         
         elif self.type == controlledcli:
             LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")

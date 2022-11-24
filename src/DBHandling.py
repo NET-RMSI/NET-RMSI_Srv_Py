@@ -1,6 +1,6 @@
 import pymongo
 from _global import *
-from LoggerModule import *
+from EventLogging import *
 
 # New rewrite brings changes to code structure, this extra module is not needed for the core server to run.
 
