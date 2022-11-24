@@ -13,25 +13,25 @@ class Clienthandling(threading.Thread):
         self.connection = connection
         
         self.type = type
-    
-    def CtrlrHandling(self):
-        while True:
-        # Insert code here to allow webserver/bot to control through tcp.
         
-            execcmd = self.connection.recv()
-        
-            
-
-    
-    def CtrldHandling(self):
-        pass
+        self.execcmd = None
+        self.cmdipaddr = None
         
     def run(self):
-        if self.type == controlledcli:
-            Clienthandling.CtrldHandling(self)
-        elif self.type == controllercli:
-            Clienthandling.CtrlrHandling(self)
-            pass
+        if self.type == controllercli:
+            while True:
+        # Insert code here to allow webserver/bot to control through tcp.
+                self.cmdipaddr, self.execcmd = str.split(self.connection.recv(4096), sep='/')
+            
+                for client in self.clients :  
+                # Insert ipaddress var requested by the controller client
+                    if client.type == controlledcli & client.ipaddress == self.cmdipaddr:  
+                        client.connection.send(self.execcmd)
+                        
+        elif self.type == controlledcli:
+            LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")
+                    
+
         
         
         

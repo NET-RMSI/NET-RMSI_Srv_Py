@@ -2,7 +2,9 @@ import pymongo
 from _global import *
 from LoggerModule import *
 
+# New rewrite brings changes to code structure, this extra module is not needed for the core server to run.
 
+'''
 def DBHANDLER(address, status):
     dbclient = pymongo.MongoClient(f'mongodb://{DBIPADDRESS}:{DBPORT}/')
     
@@ -24,7 +26,7 @@ def DBHANDLER(address, status):
         LOGEVENTS_INFO(f"{COLNAME} Created on mongodb server")
         
         dbclient.close()
-
+'''
 
 
     
