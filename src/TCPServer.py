@@ -17,7 +17,7 @@ class TCPServer:
       self.tcpserver = None
       #self.clientlist[]
       
-   def TCPServerinit(self):
+   def TCPServerMain(self):
       
       self.tcpserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
       try:
