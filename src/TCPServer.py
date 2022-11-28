@@ -35,6 +35,8 @@ class TCPServer:
       LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
       LOGEVENTS_DEBUG('Waiting for client to connect')
       
+      # Calling tcpserver.send() throws an exeception when there is no connection, possible replacement of while loop with try and except?
+      
       while True:
          
          tcpcli, (cliaddress, cliport) = self.tcpserver.accept()
@@ -49,15 +51,13 @@ class TCPServer:
             LOGEVENTS_INFO(f"{controllercli} at {self.ipaddress} identified")
             clitype = controllercli
             
-            
-            #CTRLHANDLING(cliconn)
 
          elif indata == f"{controlledcli}":
             self.tcpserver.send("valid".encode())
             LOGEVENTS_INFO(f"Recieved: {indata}")
             LOGEVENTS_INFO(f"{controlledcli} at {self.ipaddress} identified")
             clitype = controlledcli
-            #CTRLDHANDLING(cliconn, cliaddress)
+            
       
          else:
             self.tcpserver.send("invalid".encode())
@@ -71,6 +71,8 @@ class TCPServer:
          # Append the above with addition of client type for easier referencing.
          
          clientlist.append(tcpclient)
+   
+   
    
  
          
