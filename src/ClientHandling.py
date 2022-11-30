@@ -1,7 +1,7 @@
 import threading
 import queue
 from EventLogging import *
-from TCPServer import clientlist
+#from TCPServer import clientlist
 import socket
 from _global import *
 
@@ -19,6 +19,8 @@ class ClientHandling(threading.Thread):
         self.cmdipaddr = None
         
     def run(self):
+        # Temporary untested fix! May need changed
+        from TCPServer import clientlist
         if self.type == controllercli:
             while True:
         # Insert code here to allow webserver/bot to control through tcp.

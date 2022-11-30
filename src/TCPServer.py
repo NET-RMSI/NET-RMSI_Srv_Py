@@ -17,7 +17,7 @@ class TCPServer:
       self.tcpserver = None
       #self.clientlist[]
       
-   def TCPServerinit(self):
+   def TCPServerMain(self):
       
       self.tcpserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
       try:
@@ -42,29 +42,28 @@ class TCPServer:
          tcpcli, (cliaddress, cliport) = self.tcpserver.accept()
          LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
          
-         self.tcpserver.settimeout(10.0)
-         indata = self.tcpserver.recv(4096).decode('utf-8')
+         indata = tcpcli.recv(4096).decode('utf-8')
        
          if indata == f"{controllercli}":
-            self.tcpserver.send("valid".encode())
+            tcpcli.send("valid".encode())
             LOGEVENTS_INFO(f"Recieved: {indata}")
             LOGEVENTS_INFO(f"{controllercli} at {self.ipaddress} identified")
             clitype = controllercli
             
 
          elif indata == f"{controlledcli}":
-            self.tcpserver.send("valid".encode())
+            tcpcli.send("valid".encode())
             LOGEVENTS_INFO(f"Recieved: {indata}")
             LOGEVENTS_INFO(f"{controlledcli} at {self.ipaddress} identified")
             clitype = controlledcli
             
       
          else:
-            self.tcpserver.send("invalid".encode())
+            tcpcli.send("invalid".encode())
             LOGEVENTS_INFO(f"Recieved: {indata}")
             LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
             LOGEVENTS_CRITICAL(f"Closing connection to {self.ipaddress}")
-            self.tcpserver.close()
+            tcpcli.close()
          
          tcpclient = ClientHandling(cliaddress, cliport, tcpcli, clitype).start()
          
