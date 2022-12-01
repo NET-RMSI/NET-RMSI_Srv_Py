@@ -64,6 +64,8 @@ class TCPServer:
             LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
             LOGEVENTS_CRITICAL(f"Closing connection to {self.ipaddress}")
             tcpcli.close()
+            
+            continue
          
          tcpclient = ClientHandling(cliaddress, cliport, tcpcli, clitype).start()
          

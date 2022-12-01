@@ -24,7 +24,10 @@ class ClientHandling(threading.Thread):
         if self.type == controllercli:
             while True:
         # Insert code here to allow webserver/bot to control through tcp.
-                self.cmdipaddr, self.execcmd = str.split(self.connection.recv(4096).decode(), sep='/')
+                #self.cmdipaddr, self.execcmd = str.split(self.connection.recv(4096).decode(), sep='/')
+                with str.split(self.connection.recv(4096).decode(), sep='/') as dataextractlist:
+                    self.cmdipaddr = dataextractlist[0]
+                    self.ipaddress = dataextractlist[1]
                 
                 if self.execcmd == 0|1:
                     # Possibly another solution would be for this code to be called from the server.
