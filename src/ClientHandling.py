@@ -15,59 +15,38 @@ class ClientHandling(threading.Thread):
         
         self.type = type
         
-        self.execcmd = None
-        self.cmdipaddr = None
-        
     def run(self):
         # Temporary untested fix! May need changed
         from TCPServer import clientlist
+        
         if self.type == controllercli:
             while True:
         # Insert code here to allow webserver/bot to control through tcp.
                 #self.cmdipaddr, self.execcmd = str.split(self.connection.recv(4096).decode(), sep='/')
-                with str.split(self.connection.recv(4096).decode(), sep='/') as dataextractlist:
-                    self.cmdipaddr = dataextractlist[0]
-                    self.ipaddress = dataextractlist[1]
-                
-                if self.execcmd == 0|1:
+                try:
+                    with str.split(self.connection.recv(4096).decode(), sep='/') as dataextractlist:
+                        cmdipaddr = dataextractlist[0]
+                        execcmd = dataextractlist[1]
+                except Exception as ex:
+                    LOGEVENTS_ERROR(f"{ex}")
+                    LOGEVENTS_ERROR(f"Invalid data recieved: {cmdipaddr} | {execcmd}")
+                    LOGEVENTS_INFO("In some cases this results from an error but this exception may be due to the client sending empty packets upon connection")
+                    
+                if execcmd == 0|1:
                     # Possibly another solution would be for this code to be called from the server.
                     for tcpclient in clientlist: 
                 # Insert ipaddress var requested by the controller client
-                        if tcpclient.clitype == controlledcli & tcpclient.cliaddress == self.cmdipaddr:  
+                        if tcpclient.clitype == controlledcli & tcpclient.cliaddress == cmdipaddr:  
                             tcpclient.connection.send(self.execcmd)
 
                 else:
                     LOGEVENTS_ERROR(f"Invalid command recieved: {self.execcmd}")
-                
-                    
-            
-            
                         
         elif self.type == controlledcli:
             LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")
                     
 
         
-        
-        
-        
-    
-    
-      
-        
-        
-
-
-
-
-
-
-
-
-
-
-
-
 
 '''
 tcpqueue = queue.Queue()
