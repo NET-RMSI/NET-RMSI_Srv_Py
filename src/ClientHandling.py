@@ -21,26 +21,22 @@ class ClientHandling(threading.Thread):
         
         if self.type == controllercli:
             while True:
-        # Insert code here to allow webserver/bot to control through tcp.
-                #self.cmdipaddr, self.execcmd = str.split(self.connection.recv(4096).decode(), sep='/')
-                try:
-                    with str.split(self.connection.recv(4096).decode(), sep='/') as dataextractlist:
+                rawdata = self.connection.recv(4096).decode()
+                if "/" in rawdata:
+                    with str.split(rawdata, sep='/') as dataextractlist:
                         cmdipaddr = dataextractlist[0]
-                        execcmd = dataextractlist[1]
-                except Exception as ex:
-                    LOGEVENTS_ERROR(f"{ex}")
-                    LOGEVENTS_ERROR(f"Invalid data recieved: {cmdipaddr} | {execcmd}")
-                    LOGEVENTS_INFO("In some cases this results from an error but this exception may be due to the client sending empty packets upon connection")
-                    
-                if execcmd == 0|1:
+                        execcmd = dataextractlist[1] 
+                        
+                    if execcmd == 0|1:
                     # Possibly another solution would be for this code to be called from the server.
-                    for tcpclient in clientlist: 
-                # Insert ipaddress var requested by the controller client
-                        if tcpclient.clitype == controlledcli & tcpclient.cliaddress == cmdipaddr:  
-                            tcpclient.connection.send(self.execcmd)
-
+                        for tcpclient in clientlist: 
+                
+                            if tcpclient.clitype == controlledcli & tcpclient.cliaddress == cmdipaddr:  
+                                tcpclient.connection.send(self.execcmd)
+                    
                 else:
-                    LOGEVENTS_ERROR(f"Invalid command recieved: {self.execcmd}")
+                    LOGEVENTS_ERROR(f"Invalid data syntax recieved: {rawdata}")
+                    LOGEVENTS_INFO("In some cases this results from an error but this exception may be due to the client sending empty packets upon connection")
                         
         elif self.type == controlledcli:
             LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")
