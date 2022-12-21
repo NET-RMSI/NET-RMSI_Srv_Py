@@ -31,9 +31,7 @@ class ClientHandling(threading.Thread):
                 '''
                 rawdata = self.connection.recv(4096).decode()
                 if "/" in rawdata:
-                    with str.split(rawdata, sep='/') as dataextractlist:
-                        cmdipaddr = dataextractlist[0]
-                        execcmd = dataextractlist[1] 
+                    [cmdipaddr, execcmd] = str.split(rawdata, sep='/')
                         
                     if execcmd == 0|1:
                         # Possibly another solution would be for this code to be called from the server.
