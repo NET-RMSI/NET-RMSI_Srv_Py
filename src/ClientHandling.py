@@ -1,9 +1,10 @@
 import threading
 import queue
 from EventLogging import *
-#from TCPServer import clientlist
 import socket
 from _global import *
+import TCPServer
+
 
 class ClientHandling(threading.Thread):
     def __init__(self, ipaddress, port, connection, type):
@@ -16,10 +17,9 @@ class ClientHandling(threading.Thread):
         self.type = type
         
     def run(self):
-        # Temporary untested fix! May need changed/Could be fixed with a generalised import statement.
-        from TCPServer import clientlist
         
         if self.type == controllercli:
+            
             while True:
                 '''
                 # Debugging block
@@ -30,22 +30,18 @@ class ClientHandling(threading.Thread):
                     LOGEVENTS_ERROR(ex)
                 '''
                 rawdata = self.connection.recv(4096).decode()
-                if "/" in rawdata:
-                    [cmdipaddr, execcmd] = str.split(rawdata, sep='/')
+                #if "/" in rawdata:
+                [cmdipaddr, execcmd] = str.split(rawdata, sep='/')
                         
-                    if execcmd == 0|1:
+                if int(execcmd) == 0|1:
                         # Possibly another solution would be for this code to be called from the server.
-                            for tcpclient in clientlist: 
-                
-                                if tcpclient.clitype == controlledcli & tcpclient.cliaddress == cmdipaddr:  
-                                    tcpclient.connection.send(self.execcmd)
-                                    
-                    else:
-                        LOGEVENTS_ERROR(f"Invalid execution command recieved: {execcmd}")
-                    
+                        TCPServer.TCPServer.MessageClients(ipaddr=cmdipaddr, cmd=execcmd)
                 else:
-                    LOGEVENTS_ERROR(f"Invalid data syntax recieved: {rawdata}")
-                    LOGEVENTS_INFO("In some cases this results from an error but this exception may be due to the client sending empty packets upon connection")
+                    LOGEVENTS_ERROR(f"Invalid execution command recieved: {execcmd}")
+                    
+                #else:
+                #    LOGEVENTS_ERROR(f"Invalid data syntax recieved: {rawdata}")
+                #    LOGEVENTS_INFO("In some cases this results from an error but this exception may be due to the client sending empty packets upon connection")
                 
                         
         elif self.type == controlledcli:

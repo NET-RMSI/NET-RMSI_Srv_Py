@@ -3,9 +3,7 @@ import socket
 import threading
 from _global import *
 from EventLogging import *
-from ClientHandling import *
-
-clientlist = []
+from ClientHandling import ClientHandling
 
 class TCPServer:
    def __init__(self, ipaddress, port):
@@ -15,8 +13,10 @@ class TCPServer:
       
       self.srvaddress = (self.ipaddress, self.port)
       self.tcpserver = None
-      #self.clientlist[]
-      
+      self.clientlist = []
+
+   
+   
    def TCPServerMain(self):
       
       self.tcpserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -71,7 +71,20 @@ class TCPServer:
          
          # Append the above with addition of client type for easier referencing.
          
-         clientlist.append(tcpclient)
+         self.clientlist.append(tcpclient)
+         
+   #@classmethod 
+   def MessageClients(self, ipaddr, cmd):
+      
+      for tcpclient in self.clientlist: 
+                
+         if tcpclient.clitype == controlledcli & tcpclient.cliaddress == ipaddr:  
+            tcpclient.connection.send(int(cmd))
+         else:
+            LOGEVENTS_ERROR("Requested client IP Address either does not exist in clientlist or the type of client is a controller type.")
+                                    
+      
+         
    
    
    
