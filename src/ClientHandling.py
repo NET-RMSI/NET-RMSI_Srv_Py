@@ -6,14 +6,14 @@ clientlist = set()
 clientlist_lock = threading.Lock()
 
 class ClientHandling(threading.Thread):
-    def __init__(self, ipaddress, port, connection, type):
+    def __init__(self, cliaddress, cliport, tcpcli, clitype):
         threading.Thread.__init__(self)
         
-        self.ipaddress = ipaddress
-        self.port = port
+        self.ipaddress = cliaddress
+        self.port = cliport
       
-        self.connection = connection
-        self.type = type
+        self.connection = tcpcli
+        self.type = clitype
         
     def run(self):
         
