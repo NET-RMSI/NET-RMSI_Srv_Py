@@ -8,11 +8,11 @@ clientlist_lock = threading.Lock()
 class ClientHandling(threading.Thread):
     def __init__(self, ipaddress, port, connection, type):
         threading.Thread.__init__(self)
+        
         self.ipaddress = ipaddress
         self.port = port
       
         self.connection = connection
-        
         self.type = type
         
     def run(self):
@@ -50,9 +50,9 @@ class ClientHandling(threading.Thread):
                                     self.connection.send(int(execcmd))
                                     break
             
-                            else:
-                                LOGEVENTS_ERROR("Requested client IP Address either does not exist in clientlist or the type of client is a controller type.")
-                                break
+                                else:
+                                    LOGEVENTS_ERROR("Requested client IP Address either does not exist in clientlist or the type of client is a controller type.")
+                                    break
                                 
                     else:
                         LOGEVENTS_ERROR(f"Invalid execution command recieved: {execcmd}")
