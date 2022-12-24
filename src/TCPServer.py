@@ -13,10 +13,7 @@ class TCPServer:
       
       self.srvaddress = (self.ipaddress, self.port)
       self.tcpserver = None
-      self.clientlist = []
-
-   
-   
+      
    def TCPServerMain(self):
       
       self.tcpserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -28,7 +25,6 @@ class TCPServer:
          LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
          self.tcpserver.close()
          quit(code=1)
-   
       
       self.tcpserver.listen(4)
       
@@ -49,14 +45,12 @@ class TCPServer:
             LOGEVENTS_INFO(f"Recieved: {indata}")
             LOGEVENTS_INFO(f"{controllercli} at {cliaddress} identified")
             clitype = controllercli
-            
 
          elif indata == f"{controlledcli}":
             tcpcli.send("valid".encode())
             LOGEVENTS_INFO(f"Recieved: {indata}")
             LOGEVENTS_INFO(f"{controlledcli} at {cliaddress} identified")
             clitype = controlledcli
-            
       
          else:
             tcpcli.send("invalid".encode())
@@ -67,22 +61,10 @@ class TCPServer:
             
             continue
          
-         tcpclient = ClientHandling(cliaddress, cliport, tcpcli, clitype).start()
+         ClientHandling(cliaddress, cliport, tcpcli, clitype).start()
          
-         # Append the above with addition of client type for easier referencing.
-         
-         self.clientlist.append(tcpclient)
-         
-   #@classmethod 
-   def MessageClients(self, ipaddr, cmd):
       
-      for tcpclient in self.clientlist: 
-                
-         if tcpclient.clitype == controlledcli & tcpclient.cliaddress == ipaddr:  
-            tcpclient.connection.send(int(cmd))
-         else:
-            LOGEVENTS_ERROR("Requested client IP Address either does not exist in clientlist or the type of client is a controller type.")
-                                    
+                    
       
          
    
