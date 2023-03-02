@@ -5,11 +5,12 @@ from modules.req.TCPServer import *
 from _global import *
 from modules.req.FlaskWebApp import webapp
 
+    
 if (__name__ == '__main__'):
     
-    webapp.run(host="127.0.0.1", port=13065, debug=True)
-
-#Start logging.
+    threading.Thread(target=webapp.run(host="127.0.0.1", port=13065, debug=True)).start()
+    
+    #Start logging.
     LoggingInit()
     
     try:
@@ -26,6 +27,9 @@ else:
     LOGEVENTS_ERROR("Attempted code execution from an indirect source")
     LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
     quit(code=1)
+    
+
+    
     
 
 
