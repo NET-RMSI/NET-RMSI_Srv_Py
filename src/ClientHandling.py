@@ -1,8 +1,9 @@
 import threading
 from EventLogging import *
 from _global import *
+from socket import socket 
 
-clientlist = set()
+clientlist = {}
 clientlist_lock = threading.Lock()
 
 class ClientHandling(threading.Thread):
@@ -16,9 +17,6 @@ class ClientHandling(threading.Thread):
         self.type = clitype
         
     def run(self):
-        
-        with clientlist_lock:
-            clientlist.add(self.connection)
         
             if self.type == controllercli:
             
@@ -43,24 +41,18 @@ class ClientHandling(threading.Thread):
                     if int(execcmd) == 0|1:
                     # Possibly another solution would be for this code to be called from the server.
                         with clientlist_lock:
-                            
-                            for self.connection in clientlist:
-                
-                                if self.type == controlledcli & self.ipaddress == cmdipaddr:  
+                            if clientlist[cmdipaddr] == cmdipaddr:
+                                LOGEVENTS_DEBUG(f"Specified IP address found in dictonary keys: {cmdipaddr}")
+                                
+                                for clientlist[cmdipaddr] in clientlist:
                                     self.connection.send(int(execcmd))
-                                    break
-            
-                                else:
-                                    LOGEVENTS_ERROR("Requested client IP Address either does not exist in clientlist or the type of client is a controller type.")
-                                    break
+                                    
+                            else:
+                                LOGEVENTS_ERROR(f"Specified IP address not found in dictonary keys: {cmdipaddr}")
                                 
                     else:
                         LOGEVENTS_ERROR(f"Invalid execution command recieved: {execcmd}")
-                        break
-            
-                with clientlist_lock:
-                    
-                    clientlist.remove(self.connection)
+                      
                     self.connection.close()
                     
                     #else:
@@ -68,5 +60,8 @@ class ClientHandling(threading.Thread):
                     #    LOGEVENTS_INFO("In some cases this results from an error but this exception may be due to the client sending empty packets upon connection")
                         
             elif self.type == controlledcli:
+                with clientlist_lock:
+                    clientlist[self.ipaddress] = self.connection
+        
                 LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")
                     
