@@ -1,5 +1,5 @@
 import threading
-from EventLogging import *
+from modules.req.EventLogging import *
 from _global import *
 from socket import socket 
 

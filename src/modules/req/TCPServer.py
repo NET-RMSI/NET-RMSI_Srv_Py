@@ -2,8 +2,8 @@
 import socket
 import threading
 from _global import *
-from EventLogging import *
-from ClientHandling import ClientHandling
+from modules.req.EventLogging import *
+from modules.req.ClientHandling import ClientHandling
 
 class TCPServer:
    def __init__(self, ipaddress, port):

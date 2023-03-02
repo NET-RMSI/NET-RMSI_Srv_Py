@@ -3,9 +3,11 @@ import threading
 from modules.req.EventLogging import *
 from modules.req.TCPServer import *
 from _global import *
+from modules.req.FlaskWebApp import webapp
 
-    
 if (__name__ == '__main__'):
+    
+    webapp.run(host="127.0.0.1", port=13065, debug=True)
 
 #Start logging.
     LoggingInit()
