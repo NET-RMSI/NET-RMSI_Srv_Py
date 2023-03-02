@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import threading
-from EventLogging import *
-from TCPServer import *
+from modules.req.EventLogging import *
+from modules.req.TCPServer import *
 from _global import *
 
     
@@ -11,7 +11,7 @@ if (__name__ == '__main__'):
     LoggingInit()
     
     try:
-        from LCDController import *
+        from modules.opt.LCDController import *
         LCDINIT()
         threading.Thread(target=LCDROUTINE).start()
     except Exception as ex:
