@@ -1,23 +1,44 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>NET-RMSI Web Interface</title>
+        <h2>NET-RMSI Web Interface</h2>
         <style>
+            head {
+                font-size: 17px;
+                font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+            }
             body {
                 background-color: rgb(194, 194, 194);
+                max-width: 1000px;
+                margin: 0 auto;
+                text-align: center;
+                padding: 20px;
             }
-            .userInput {
-                border: 5px black;
+            footer
+            {
+                font-size: 10px;
+                text-align: center;
+            }
+            .userinput {
+                padding: 8px 16px;
                 background-color: grey;
+                border: 2px solid #1c2023;
+                border-radius: 4px;
+                float: center;
                 text-align: center;
             }
         </style>
     </head>
     <body>
-        <div class="userInput">
-            <form action="" method="get">
-                <h2>NET-RMSI Web Interface</h2>
+        <div class="userinput">
+            <form method="post">
                 <label for="serverlist">Choose a server to issue a command:</label>
-                <select name="ServerIP" id="serverlist">
-                <input type="submit" value="Enter">
+                <select name="serverip" id="serverip">
+                    <option value="192.168.0.1">Server_1</option>
+                <input type="submit" name= "submit" value="Enter">
                 <p></p>
             </form>
         </div>
