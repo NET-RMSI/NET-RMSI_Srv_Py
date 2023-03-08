@@ -37,7 +37,10 @@
             <form method="post">
                 <label for="serverlist">Choose a server to issue a command:</label>
                 <select name="serverip" id="serverip">
-                    <option value="192.168.0.1">Server_1</option>
+                    {% for ip in serverip %}
+                        <option value="{{ ip }}">{{ ip }}</option>
+                    {% endfor %}
+                </select>
                 <input type="submit" name= "submit" value="Enter">
                 <p></p>
             </form>
