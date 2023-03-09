@@ -4,12 +4,14 @@ from modules.req.EventLogging import *
 from modules.req.TCPServer import *
 from _global import *
 from modules.req.FlaskWebApp import webapp
+from modules.req.DBHandling import *
 
 
     
 if (__name__ == '__main__'):
     
     threading.Thread(target=webapp.run(host="127.0.0.1", port=13065, debug=True)).start()
+    
         
     #Start logging.
     LoggingInit()
