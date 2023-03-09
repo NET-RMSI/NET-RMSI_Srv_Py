@@ -2,13 +2,14 @@ from flask import Flask, render_template, request
 from modules.req.EventLogging import *
 
 webapp = Flask(__name__)
-test = "test"
+test = ('test', 'test2')
 
 @webapp.route("/", methods=["GET", "POST"])
-def index():
+def Index():
     print(request.form.get("serverip"))
     
     return render_template('index.html', serverip=test)
+
 
         
         

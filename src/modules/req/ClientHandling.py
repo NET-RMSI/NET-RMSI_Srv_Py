@@ -45,7 +45,7 @@ class ClientHandling(threading.Thread):
                                 LOGEVENTS_DEBUG(f"Specified IP address found in dictonary keys: {cmdipaddr}")
                                 
                                 for clientlist[cmdipaddr] in clientlist:
-                                    self.connection.send(int(execcmd))
+                                    clientlist[cmdipaddr].send(int(execcmd))
                                     
                             else:
                                 LOGEVENTS_ERROR(f"Specified IP address not found in dictonary keys: {cmdipaddr}")
@@ -62,6 +62,7 @@ class ClientHandling(threading.Thread):
             elif self.type == controlledcli:
                 with clientlist_lock:
                     clientlist[self.ipaddress] = self.connection
+                    
         
                 LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")
                     
