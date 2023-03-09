@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import threading
-from modules.req.EventLogging import *
+from modules.req.EventLogging import EventLogger as EL
 from modules.req.TCPServer import *
 from _global import *
 from modules.req.FlaskWebApp import webapp
@@ -14,21 +14,21 @@ if (__name__ == '__main__'):
     
         
     #Start logging.
-    LoggingInit()
+    EL(None).LoggingInit()
     
     try:
         from modules.opt.LCDController import *
         LCDINIT()
         threading.Thread(target=LCDROUTINE).start()
     except Exception as ex:
-        LOGEVENTS_ERROR(f"{ex}")
-        LOGEVENTS_INFO("Ignore above errors if LCD module has not been installed due to lack of an LCD screen on/or connected to the hardware")
+        EL(f"ex").LOGEVENTS_ERROR()
+        EL("Ignore above errors if LCD module has not been installed due to lack of an LCD screen on/or connected to the hardware").LOGEVENTS_INFO()
     
     TCPServer(IPADDRESS, PORT).TCPServerMain()
 
 else:
-    LOGEVENTS_ERROR("Attempted code execution from an indirect source")
-    LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
+    EL("Attempted code execution from an indirect source").LOGEVENTS_ERROR()
+    EL("Terminating NET-RMSI_Srv_Py").LOGEVENTS_CRITICAL()
     quit(code=1)
     
 

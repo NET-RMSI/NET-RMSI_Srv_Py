@@ -2,41 +2,42 @@ import datetime
 import logging
 from _global import *
 
-
-def LoggingInit():
-
+class EventLogger():
+    def __init__(self, input):
+        self.input = input
     
-    logging.basicConfig (filename= 'NET-RMSI_Srv_Py.log', encoding='utf-8')
+    def LoggingInit(self):
+        
+        logging.basicConfig (filename= 'NET-RMSI_Srv_Py.log', encoding='utf-8')
     
-    LOGEVENTS_INFO(f"Logging started")
-    LOGEVENTS_INFO(f"Server Version: {serverversion}")
-
+        EventLogger(f"Logging started").LOGEVENTS_INFO()
+        EventLogger(f"Server Version: {serverversion}").LOGEVENTS_INFO()
     
+    def LOGEVENTS_INFO(self):
 
-def LOGEVENTS_INFO(input):
-
-    currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     
-    print(f"{currentdateandtimestr} " + input)
-    logging.info(f"{currentdateandtimestr} " + input)
+        print(f"{currentdateandtimestr} " + self.input)
+        logging.info(f"{currentdateandtimestr} " + self.input)
 
-def LOGEVENTS_DEBUG(input):
+    def LOGEVENTS_DEBUG(self):
 
-    currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-    print(f"{currentdateandtimestr} " + input)
-    logging.debug(f"{currentdateandtimestr} " + input)
+        currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        print(f"{currentdateandtimestr} " + self.input)
+        logging.debug(f"{currentdateandtimestr} " + self.input)
 
-def LOGEVENTS_ERROR(input):
+    def LOGEVENTS_ERROR(self):
 
-    currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-    print(f"{currentdateandtimestr} " + input)
-    logging.error(f"{currentdateandtimestr} " + input)
+        currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        print(f"{currentdateandtimestr} " + self.input)
+        logging.error(f"{currentdateandtimestr} " + self.input)
 
-def LOGEVENTS_CRITICAL(input):
+    def LOGEVENTS_CRITICAL(self):
     
-    currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
-    print(f"{currentdateandtimestr} " + input)
-    logging.critical(f"{currentdateandtimestr} " + input)
+        currentdateandtimestr = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        print(f"{currentdateandtimestr} " + self.input)
+        logging.critical(f"{currentdateandtimestr} " + self.input)
+
 
 
 

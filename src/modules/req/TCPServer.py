@@ -2,7 +2,7 @@
 import socket
 import threading
 from _global import *
-from modules.req.EventLogging import *
+from modules.req.EventLogging import EventLogger as EL
 from modules.req.ClientHandling import ClientHandling
 
 class TCPServer:
@@ -21,42 +21,42 @@ class TCPServer:
          self.tcpserver.bind(self.srvaddress)
       
       except Exception as ex:
-         LOGEVENTS_ERROR(f"{ex}")
-         LOGEVENTS_CRITICAL(f"Terminating NET-RMSI_Srv_Py")
+         EL(f"{ex}").LOGEVENTS_ERROR()
+         EL(f"Terminating NET-RMSI_Srv_Py").LOGEVENTS_CRITICAL()
          self.tcpserver.close()
          quit(code=1)
       
       self.tcpserver.listen(4)
       
-      LOGEVENTS_DEBUG(f"TCPServer listening on {PORT}")
-      LOGEVENTS_DEBUG('Waiting for client to connect')
+      EL(f"TCPServer listening on {PORT}").LOGEVENTS_DEBUG()
+      EL('Waiting for client to connect').LOGEVENTS_DEBUG()
       
       # Calling tcpserver.send() throws an exeception when there is no connection, possible replacement of while loop with try and except?
       
       while True:
          
          tcpcli, (cliaddress, cliport) = self.tcpserver.accept()
-         LOGEVENTS_DEBUG(f"Connected to {cliaddress}")
+         EL(f"Connected to {cliaddress}").LOGEVENTS_DEBUG()
          
          indata = tcpcli.recv(4096).decode('utf-8')
        
          if indata == f"{controllercli}":
             tcpcli.send("valid".encode())
-            LOGEVENTS_INFO(f"Recieved: {indata}")
-            LOGEVENTS_INFO(f"{controllercli} at {cliaddress} identified")
+            EL(f"Recieved: {indata}").LOGEVENTS_INFO()
+            EL(f"{controllercli} at {cliaddress} identified").LOGEVENTS_INFO()
             clitype = controllercli
 
          elif indata == f"{controlledcli}":
             tcpcli.send("valid".encode())
-            LOGEVENTS_INFO(f"Recieved: {indata}")
-            LOGEVENTS_INFO(f"{controlledcli} at {cliaddress} identified")
+            EL(f"Recieved: {indata}").LOGEVENTS_INFO()
+            EL(f"{controlledcli} at {cliaddress} identified").LOGEVENTS_INFO()
             clitype = controlledcli
       
          else:
             tcpcli.send("invalid".encode())
-            LOGEVENTS_INFO(f"Recieved: {indata}")
-            LOGEVENTS_CRITICAL("Failed to recieve client identifier, unknown client")
-            LOGEVENTS_CRITICAL(f"Closing connection to {cliaddress}")
+            EL(f"Recieved: {indata}").LOGEVENTS_INFO()
+            EL("Failed to recieve client identifier, unknown client").LOGEVENTS_CRITICAL()
+            EL(f"Closing connection to {cliaddress}").LOGEVENTS_CRITICAL()
             tcpcli.close()
             
             continue

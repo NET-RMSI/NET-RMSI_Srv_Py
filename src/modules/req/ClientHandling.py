@@ -1,5 +1,5 @@
 import threading
-from modules.req.EventLogging import *
+from modules.req.EventLogging import EventLogger as EL
 from _global import *
 from socket import socket 
 
@@ -35,23 +35,23 @@ class ClientHandling(threading.Thread):
                         [cmdipaddr, execcmd] = str.split(rawdata, sep='/')
                     
                     except Exception as ex:
-                        LOGEVENTS_ERROR(ex)
-                        LOGEVENTS_INFO("Recieved data does not contain a '/' separating the IP address from the execution command")
+                        EL(ex).LOGEVENTS_ERROR()
+                        EL("Recieved data does not contain a '/' separating the IP address from the execution command").LOGEVENTS_INFO()
                         
                     if int(execcmd) == 0|1:
                     # Possibly another solution would be for this code to be called from the server.
                         with clientlist_lock:
                             if clientlist[cmdipaddr] == cmdipaddr:
-                                LOGEVENTS_DEBUG(f"Specified IP address found in dictonary keys: {cmdipaddr}")
+                                EL(f"Specified IP address found in dictonary keys: {cmdipaddr}").LOGEVENTS_DEBUG()
                                 
                                 for clientlist[cmdipaddr] in clientlist:
                                     clientlist[cmdipaddr].send(int(execcmd))
                                     
                             else:
-                                LOGEVENTS_ERROR(f"Specified IP address not found in dictonary keys: {cmdipaddr}")
+                                EL(f"Specified IP address not found in dictonary keys: {cmdipaddr}").LOGEVENTS_ERROR()
                                 
                     else:
-                        LOGEVENTS_ERROR(f"Invalid execution command recieved: {execcmd}")
+                        EL(f"Invalid execution command recieved: {execcmd}").LOGEVENTS_ERROR()
                       
                     self.connection.close()
                     
@@ -64,5 +64,5 @@ class ClientHandling(threading.Thread):
                     clientlist[self.ipaddress] = self.connection
                     
         
-                LOGEVENTS_INFO("Controlled client thread, waiting for commands from a controller thread")
+                EL("Controlled client thread, waiting for commands from a controller thread").LOGEVENTS_INFO()
                     

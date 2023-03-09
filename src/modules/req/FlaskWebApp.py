@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request 
-from modules.req.EventLogging import *
+from modules.req.EventLogging import EventLogger
 
 webapp = Flask(__name__)
 test = ('test', 'test2')
