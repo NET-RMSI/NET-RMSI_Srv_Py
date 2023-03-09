@@ -10,6 +10,7 @@ def LoggingInit():
     
     LOGEVENTS_INFO(f"Logging started")
     LOGEVENTS_INFO(f"Server Version: {serverversion}")
+
     
 
 def LOGEVENTS_INFO(input):
